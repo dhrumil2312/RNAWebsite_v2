@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+{% load staticfiles %}
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Results ENTRNA</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href=" {% static 'assets/css/main.css' %}" />
+
+    <link href="https://cdn.pydata.org/bokeh/release/bokeh-0.13.0.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                <li><a href="/rnawebservices">Welcome</a></li>
+                <li><a href="/rnawebservices">ENTRNA</a></li>
+                <li><a href="/rnawebservices">QLRNA</a></li>
+                <li><a href="/rnawebservices">Get in touch</a></li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <div class="features">
+    <section >
+        <div id="result" >
+            <h1> ENTRNA</h1>
+            <h2> Foldability Results </h2>
+            <table align="left" class="table table-hover">
+                <tbody>
+            {% for sequence , structure, foldability , fe , mfe , mfe_str in allContent %}
+                <tr>
+                    <td> The sequence entered is :</td>
+                    <td> <strong> {{ sequence }} </strong></td>
+                </tr>
+                <tr>
+                    <td> The structure entered is : </td>
+                    <td> <strong>{{ structure }} </strong> </td>
+                </tr>
+                <tr>
+                    <td> Foldability of the RNA entered is : </td>
+                    <td> <strong>{{ foldability }} </strong></td>
+                </tr>
+                <tr>
+                    <td> Time at which the sequence is entered: </td>
+                    <td> <strong> {{ submitted_time }} </strong></td>
+                </tr>
+                <tr>
+                    <td> Free Energy of this pair: </td>
+                    <td> <strong> {{ fe }}</strong></td>
+                </tr>
+                <tr>
+                    <td> Minimum Free Energy of the sequence is : </td>
+                    <td> <strong> {{ mfe }}</strong></td>
+                </tr>
+                <tr>
+                    <td> MFE structure of the sequence is : </td>
+                    <td> <strong> {{ mfe_str }}</strong></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+     <section>
+            {{ div | safe }}
+    </section>
+    <section>
+        <div id="invalidinput" style="display: none">
+            {% for sequence,struture in invalid %}
+            <p> Invalid Sequence and Structure pair</p>
+            <p> Sequence: {{ sequence }}</p>
+            <p> Structure : {{ struture }}</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    </div>
+    </div>
+
+</div>
+
+</div>
+<!-- Scripts -->
+<script src=" {% static 'assets/js/jquery.min.js' %} "></script>
+<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.scrolly.min.js' %}"></script>
+<script src="{% static 'assets/js/skel.min.js' %}"></script>
+<script src="{% static 'assets/js/util.js' %}"></script>
+
+<script src="{% static 'assets/js/main.js' %}"></script>
+
+
+</body>
+<script src="https://cdn.pydata.org/bokeh/release/bokeh-0.13.0.min.js"></script>
+
+    {{ script | safe }}
+
+</html>
